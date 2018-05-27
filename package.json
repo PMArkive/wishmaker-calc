@@ -1,7 +1,8 @@
 {
-  "name": "preact",
-  "description": null,
-  "version": "0.0.18",
+  "name": "wishmaker-calc",
+  "description": "Web app to calculate when to save for a shiny Wishmaker",
+  "version": "0.1.0",
+  "author": "Zaksabeast",
   "dependencies": {
     "lodash-es": "^4.17.10",
     "preact": "8.2.5",
@@ -18,13 +19,9 @@
     "stylus-loader": "^3.0.1"
   },
   "scripts": {
-    "test": "eslint . && preact test",
     "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
     "build": "preact build",
     "serve": "preact build && preact serve",
     "dev": "preact watch"
-  },
-  "eslintConfig": {
-    "extends": "eslint-config-synacor"
   }
 }
