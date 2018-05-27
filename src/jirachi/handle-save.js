@@ -9,13 +9,13 @@ function handleSave(event) {
 
   reader.onload = () => {
     const save = new Uint8Array(reader.result);
-    const { seed, time } = findShinyJirachiTime(save);
+    const result = findShinyJirachiTime(save);
 
-    if (isNil(seed) && isNil(time)) {
+    if (isNil(result)) {
       return render(<div>No results found</div>, document.getElementById('result'));
     }
 
-    return render(<Result seed={seed} time={time} />, document.getElementById('result'));
+    return render(<Result result={result} />, document.getElementById('result'));
   }
   reader.readAsArrayBuffer(saveData);
 };

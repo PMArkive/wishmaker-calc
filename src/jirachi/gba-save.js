@@ -17,9 +17,7 @@ function getBlocks(save) {
 }
 
 function getBlockNum(blocks, blockNum) {
-  const [block] = filter(blocks, (block) => isEqual(block[0xFF4], blockNum));
-
-  return block;
+  return filter(blocks, (block) => isEqual(block[0xFF4], blockNum));
 }
 
 function blockSaveAmount(block) {
