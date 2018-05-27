@@ -20,7 +20,7 @@ function bytesToSeconds([ hoursl, hoursh, minutes, seconds ]) {
 function secondsToBytes(time) {
   const seconds = time % 60;
   const minutes = floor(time / 60) % 60;
-  const hours = floor(time / 3600) % 60;
+  const hours = floor(time / 3600);
   const hoursl = hours & 0xFF;
   const hoursh = hours >>> 8;
 
