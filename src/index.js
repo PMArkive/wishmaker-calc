@@ -1,5 +1,5 @@
-import "./style";
-import { Component, render } from "preact";
+import './style';
+import { Component, render } from 'preact';
 import { JirachiImg } from './components/jirachi-img';
 import { handleSave } from './jirachi/handle-save';
 
@@ -11,10 +11,10 @@ export default class App extends Component {
         Click the Jirachi to calculate your shiny Wishmaker time
 
         <div style={{ marginTop: '25px' }}>
-          <label for="saveInput">
+          <label for='saveInput'>
             <JirachiImg />
           </label>
-          <input onchange={handleSave} type="file" id="saveInput" style={{ display: 'none' }}/>
+          <input onchange={handleSave} type='file' id='saveInput' style={{ display: 'none' }}/>
           <div id='result'>
           </div>
         </div>
@@ -23,6 +23,6 @@ export default class App extends Component {
   }
 }
 
-if (typeof window !== "undefined") {
-  render(<App />, document.getElementById("root"));
+if (typeof window !== 'undefined') {
+  render(<App />, document.getElementById('root'));
 }
