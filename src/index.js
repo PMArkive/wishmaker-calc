@@ -36,7 +36,7 @@ export default class App extends Component {
     return (
       <div style={{ textAlign: 'center', marginTop: '10%' }}>
         <h1>Welcome to JirachiCalc</h1>
-        Click the Jirachi to claculate your shiny Wishmaker time
+        Click the Jirachi to calculate your shiny Wishmaker time
 
         <div style={{ marginTop: '25px' }}>
           <label for="saveInput">
