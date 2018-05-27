@@ -1,35 +1,7 @@
 import "./style";
 import { Component, render } from "preact";
-import { findShinyJirachiTime } from './jirachi/jirachi';
-
-const SpacedBlock = ({ children }) => <div style={{ padding: '5px' }}>{children}</div>;
-
-const Result = ({ seed, time }) => {
-  const { pid, nature, ivs, shinySeed } = seed;
-
-  return (
-    <div>
-      <SpacedBlock>{time}</SpacedBlock>
-      <SpacedBlock>Seed: {shinySeed}, PID: {pid}, Nature: {nature}</SpacedBlock>
-      <SpacedBlock>IVs: {ivs}</SpacedBlock>
-    </div>
-  );
-}
-
-function handleFile(event) {
-  const [ saveData ] = event.target.files;
-  const reader = new FileReader();
-
-  reader.onload = () => {
-    const save = new Uint8Array(reader.result);
-    const { seed, time } = findShinyJirachiTime(save);
-    
-    render(<Result seed={seed} time={time} />, document.getElementById('result'));
-  }
-  reader.readAsArrayBuffer(saveData);
-};
-
-const JirachiImg = () => <img src='https://vignette.wikia.nocookie.net/pkmnshuffle/images/6/60/Jirachi.png/revision/latest?cb=20170407224444' />;
+import { JirachiImg } from './components/jirachi-img';
+import { handleSave } from './jirachi/handle-save';
 
 export default class App extends Component {
   render() {
@@ -42,7 +14,7 @@ export default class App extends Component {
           <label for="saveInput">
             <JirachiImg />
           </label>
-          <input onchange={handleFile} type="file" id="saveInput" style={{ display: 'none' }}/>
+          <input onchange={handleSave} type="file" id="saveInput" style={{ display: 'none' }}/>
           <div id='result'>
           </div>
         </div>
