@@ -12,7 +12,8 @@ function isJirachiSeed(block0) {
   return chk;
 }
 
-function bytesToSeconds([ hours, minutes, seconds ]) {
+function bytesToSeconds([ hoursl, hoursh, minutes, seconds ]) {
+  const hours = (hoursh * 0x100) + hoursl;
   return (hours * 3600) + (minutes * 60) + seconds;
 }
 
@@ -20,8 +21,10 @@ function secondsToBytes(time) {
   const seconds = time % 60;
   const minutes = floor(time / 60) % 60;
   const hours = floor(time / 3600) % 60;
+  const hoursl = hours & 0xFF;
+  const hoursh = hours >>> 8;
 
-  return [ hours, minutes, seconds ];
+  return [ hoursl, hoursh, minutes, seconds ];
 }
 
 function increaseTime(bytes) {
@@ -29,7 +32,8 @@ function increaseTime(bytes) {
 }
 
 function timeToString(time) {
-  const [ hours, minutes, seconds, frames ] = time;
+  const [ hoursl, hoursh, minutes, seconds, frames ] = time;
+  const hours = (hoursh * 0x100) + hoursl;
 
   return `Hours: ${hours}, Min: ${minutes}, Sec: ${seconds}, Frames: ${frames}`;
 }
@@ -37,9 +41,9 @@ function timeToString(time) {
 function findShinyJirachiTime(save, searchHours = 1) {
   const blocks = getBlocks(save);
   const block0 = getBlockNum(blocks, 0);
-  const block0_1 = slice(block0, 0, 15);
+  const block0_1 = slice(block0, 0, 14);
   const block0_2 = slice(block0, 18);
-  let time = slice(block0, 15, 18);
+  let time = slice(block0, 14, 18);
 
   for (let i = 0; i < 3600 * searchHours; i++) {
     const shinySeed = isJirachiSeed(concat(block0_1, time, block0_2));

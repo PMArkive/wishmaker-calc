@@ -16,7 +16,7 @@ local targetSaveHour=0
 local targetSaveMinute=0
 local targetSaveSecond=0
 local targetsixtiethSecond=0
-local targetJirachiSeed=0xCF37
+local targetJirachiSeed=0x0
 
 --DON'T EDIT ANYTHING BEYOND HERE
 local time=0x2F64EB3
@@ -34,7 +34,7 @@ while true do
     minute=memory.readbyte(time+0x01)
     second=memory.readbyte(time+0x02)
     sixtiethSecond=memory.readbyte(time+0x03)
-    hour=memory.readbyte(time)
+    hour=memory.readword(0x2024EB2)
     money=memory.readwordunsigned(0x2F25BC4)
     if(hour==targetSaveHour and minute==targetSaveMinute and second==targetSaveSecond and sixtiethSecond==targetsixtiethSecond) then
         joypad.set(1, joyPress)
