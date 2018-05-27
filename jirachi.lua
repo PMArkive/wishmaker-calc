@@ -25,8 +25,6 @@ local startSecond=0
 local startsixtiethSecond=0
 local startHour=0
 local start=0x030045C0
-local joyPress={}
-joyPress["A"]=1
 
 while true do
     tid=memory.readwordunsigned(0x2024EAE)
@@ -36,9 +34,6 @@ while true do
     sixtiethSecond=memory.readbyte(time+0x03)
     hour=memory.readword(0x2024EB2)
     money=memory.readwordunsigned(0x2F25BC4)
-    if(hour==targetSaveHour and minute==targetSaveMinute and second==targetSaveSecond and sixtiethSecond==targetsixtiethSecond) then
-        joypad.set(1, joyPress)
-    end
     seed=memory.readdwordunsigned(0x03004818)
     gui.text(4,30,"Target Save Time:  "..targetSaveHour..":"..targetSaveMinute..":"..targetSaveSecond..":"..targetsixtiethSecond)
     gui.text(4,40,"Time:  "..hour..":"..minute..":"..second..":"..sixtiethSecond)
