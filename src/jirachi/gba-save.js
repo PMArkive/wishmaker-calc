@@ -1,4 +1,4 @@
-import { map, range, filter, isEqual, slice } from 'lodash-es';
+import { map, range, filter, isEqual, slice, isEmpty } from 'lodash-es';
 
 function calcChksum(block) {
   let [chksum] = new Uint32Array(1);
@@ -35,4 +35,18 @@ function isBlockNewer(block1, block2) {
   return amount1 > amount2;
 };
 
-export { calcChksum, getBlocks, getBlockNum, blockSaveAmount, isBlockNewer };
+function isValidRNG(first, second) {
+  const validP1 = isEqual(slice(first, 0, 14), slice(second, 0, 14));
+  const validP2 = isEqual(slice(first, 19, 0xFF0), slice(second, 19, 0xFF0));
+
+  return validP1 && validP2;
+}
+
+export {
+  calcChksum,
+  getBlocks,
+  getBlockNum,
+  blockSaveAmount, 
+  isBlockNewer,
+  isValidRNG
+};

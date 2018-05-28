@@ -6,20 +6,18 @@ const Result = ({ result }) => {
     return <div style={{ marginTop: '15px' }}>No results found!</div>
   }
 
-  const { seed, time, isFirstBlockNewer } = result;
-  const { pid, nature, ivs, shinySeed } = seed;
-  
-  const saveMessage = join([
-    'Your latest save is in the wrong space',
-    'please save once before attempting this'
-  ], ' - ');
+  const { seed, time, isFirstBlockNewer, validRNG } = result;
+
+  if (!validRNG || isFirstBlockNewer) {
+    const message = isFirstBlockNewer ? 'Current save is in the wrong place' : 'Small anomaly in block 0';
+    return <SpacedBlock>Please save one more time - {message}</SpacedBlock>;
+  }
 
   return (
     <div style={{ marginTop: '15px' }}>
       <SpacedBlock>{time}</SpacedBlock>
-      <SpacedBlock>Seed: {shinySeed}, PID: {pid}, Nature: {nature}</SpacedBlock>
-      <SpacedBlock>IVs: {ivs}</SpacedBlock>
-      <SpacedBlock>{isFirstBlockNewer ? saveMessage : ''}</SpacedBlock>
+      <SpacedBlock>Seed: {seed.shinySeed}, PID: {seed.pid}, Nature: {seed.nature}</SpacedBlock>
+      <SpacedBlock>IVs: {seed.ivs}</SpacedBlock>
     </div>
   );
 }

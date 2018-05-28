@@ -1,6 +1,12 @@
 import { floor, isUndefined, slice, concat, assign, isEqual } from 'lodash-es';
 import { spreads } from './jirachi-spreads';
-import { calcChksum, getBlockNum, getBlocks, isBlockNewer } from './gba-save';
+import {
+  calcChksum,
+  getBlockNum,
+  getBlocks,
+  isBlockNewer,
+  isValidRNG
+} from './gba-save';
 
 function isJirachiSeed(block0) {
   const chk = calcChksum(block0);
@@ -41,6 +47,12 @@ function timeToString(time) {
 function findShinyJirachiTime(save, searchHours = 1) {
   const blocks = getBlocks(save);
   const [ firstBlock0, secondBlock0 ] = getBlockNum(blocks, 0);
+  const validRNG = isValidRNG(firstBlock0, secondBlock0);
+
+  if (!validRNG) {
+    return { validRNG };
+  }
+
   const isFirstBlockNewer = isBlockNewer(firstBlock0, secondBlock0);
   const block0 = isFirstBlockNewer ? firstBlock0 : secondBlock0;
   const block0p1 = slice(block0, 0, 14);
@@ -54,7 +66,8 @@ function findShinyJirachiTime(save, searchHours = 1) {
       return {
         seed: assign({}, spreads[shinySeed], { shinySeed }),
         time: timeToString(concat(time, [ block0[18] ])),
-        isFirstBlockNewer
+        isFirstBlockNewer,
+        validRNG
       };
     }
 
