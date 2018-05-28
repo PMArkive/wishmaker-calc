@@ -6,6 +6,7 @@ import { findShinyJirachiTime } from './jirachi';
 function handleSave(event) {
   const [ saveData ] = event.target.files;
   const reader = new FileReader();
+  document.getElementById('saveInput').value = null;
 
   reader.onload = () => {
     const save = new Uint8Array(reader.result);
