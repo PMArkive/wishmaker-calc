@@ -51,7 +51,7 @@ function findShinyJirachiTime(save, searchHours = 1) {
   const validRNG = isValidRNG(firstBlock0, secondBlock0);
 
   if (!validRNG) {
-    return { validRNG };
+    return { validRNG, checksum };
   }
 
   const isFirstBlockNewer = isBlockNewer(firstBlock0, secondBlock0);
