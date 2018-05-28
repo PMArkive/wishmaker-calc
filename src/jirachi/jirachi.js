@@ -47,6 +47,7 @@ function timeToString(time) {
 function findShinyJirachiTime(save, searchHours = 1) {
   const blocks = getBlocks(save);
   const [ firstBlock0, secondBlock0 ] = getBlockNum(blocks, 0);
+  const checksum = calcChksum(firstBlock0);
   const validRNG = isValidRNG(firstBlock0, secondBlock0);
 
   if (!validRNG) {
@@ -67,7 +68,8 @@ function findShinyJirachiTime(save, searchHours = 1) {
         seed: assign({}, spreads[shinySeed], { shinySeed }),
         time: timeToString(concat(time, [ block0[18] ])),
         isFirstBlockNewer,
-        validRNG
+        validRNG,
+        checksum
       };
     }
 
